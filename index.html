@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHIBUYA GAL THRIFT — Vintage & Antique Y2K Store</title>
+  
+  <!-- Google Fonts: Y2K Pop & Retro Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Playfair+Display:ital,wght@1,700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --hot-pink: #ff1493;
+      --neon-pink: #ff69b4;
+      --soft-pink: #ffe4f2;
+      --leopard-tan: #f4a460;
+      --leopard-dark: #3b1e08;
+      --glossy-white: rgba(255, 255, 255, 0.92);
+      --gold-bling: #ffd700;
+      --purple-y2k: #9d4edd;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: #ffb6c1;
+      /* Pattern Leopard Print Khas Gyaru */
+      background-image: 
+        radial-gradient(ellipse at 20% 25%, var(--leopard-dark) 4px, transparent 5px),
+        radial-gradient(ellipse at 23% 28%, var(--leopard-tan) 9px, transparent 10px),
+        radial-gradient(ellipse at 70% 65%, var(--leopard-dark) 5px, transparent 6px),
+        radial-gradient(ellipse at 73% 68%, var(--leopard-tan) 11px, transparent 12px),
+        radial-gradient(ellipse at 45% 80%, var(--leopard-dark) 4px, transparent 5px),
+        radial-gradient(ellipse at 48% 82%, var(--leopard-tan) 9px, transparent 10px),
+        linear-gradient(135deg, #ff7eb3 0%, #ff758c 50%, #ffb199 100%);
+      background-size: 120px 120px, 120px 120px, 140px 140px, 140px 140px, 100px 100px, 100px 100px, cover;
+      color: #2b091c;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .font-gyaru {
+      font-family: 'Fredoka', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    /* --- GLOSSY Y2K CARD --- */
+    .gyaru-card {
+      background: var(--glossy-white);
+      border: 3px solid var(--hot-pink);
+      border-radius: 24px;
+      box-shadow: 0 10px 0 var(--hot-pink), 0 15px 30px rgba(255, 20, 147, 0.35);
+      padding: 24px;
+      position: relative;
+    }
+
+    /* --- HALAMAN LOGIN & REGISTER --- */
+    #auth-container {
+      max-width: 430px;
+      margin: 40px auto;
+      text-align: center;
+    }
+
+    .logo-title {
+      font-size: 2.2rem;
+      color: var(--hot-pink);
+      text-shadow: 2px 2px 0px #fff, 4px 4px 0px #ffb6c1;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--purple-y2k);
+      margin-bottom: 20px;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: var(--soft-pink);
+      padding: 5px;
+      border-radius: 50px;
+      border: 2px solid var(--neon-pink);
+      margin-bottom: 20px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 50px;
+      background: transparent;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      color: var(--hot-pink);
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .auth-tab.active {
+      background: linear-gradient(180deg, #ff69b4, #ff1493);
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(255, 20, 147, 0.4);
+    }
+
+    .input-group {
+      text-align: left;
+      margin-bottom: 14px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--hot-pink);
+      margin-bottom: 5px;
+      padding-left: 8px;
+    }
+
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 50px;
+      border: 2px solid var(--neon-pink);
+      background: #fff;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      color: #333;
+      outline: none;
+    }
+
+    .input-group input:focus {
+      border-color: var(--purple-y2k);
+      box-shadow: 0 0 0 4px rgba(157, 78, 221, 0.2);
+    }
+
+    .btn-bling {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(180deg, #ff77c2 0%, #ff1493 100%);
+      color: #fff;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #b00060;
+      transition: transform 0.1s;
+      margin-top: 6px;
+    }
+
+    .btn-bling:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #b00060;
+    }
+
+    .btn-guest {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 50px;
+      border: 2px dashed var(--hot-pink);
+      background: var(--soft-pink);
+      color: var(--hot-pink);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .error-banner {
+      background: #ffe0e9;
+      color: #d00036;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    /* --- TOKO THRIFT UTAMA --- */
+    #shop-container {
+      display: none;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--soft-pink);
+      padding: 8px 16px;
+      border-radius: 50px;
+      border: 2px solid var(--hot-pink);
+      font-weight: 700;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      padding: 10px 18px;
+      border-radius: 50px;
+      border: 2px solid var(--hot-pink);
+      background: #fff;
+      color: var(--hot-pink);
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .pill-btn.active, .pill-btn:hover {
+      background: var(--hot-pink);
+      color: #fff;
+    }
+
+    /* Filter Kategori */
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    /* Grid Produk */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+      gap: 22px;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 3px solid var(--neon-pink);
+      border-radius: 22px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 8px 0 var(--neon-pink);
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px) rotate(-1deg);
+    }
+
+    .item-emoji-box {
+      background: linear-gradient(135deg, #ffe4f2, #f3d9ff);
+      border-radius: 16px;
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      margin-bottom: 12px;
+      position: relative;
+      border: 2px dashed var(--neon-pink);
+    }
+
+    .era-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: var(--purple-y2k);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .item-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.05rem;
+      color: #2b091c;
+      margin-bottom: 4px;
+    }
+
+    .item-desc {
+      font-size: 0.8rem;
+      color: #6b4c5e;
+      margin-bottom: 10px;
+    }
+
+    .item-price {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      color: var(--hot-pink);
+      margin-bottom: 12px;
+    }
+
+    /* Modal Keranjang & Jual Barang */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(43, 9, 28, 0.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 450px;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .cart-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: var(--soft-pink);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HALAMAN LOGIN / DAFTAR ================= -->
+  <section id="auth-container" class="gyaru-card">
+    <div style="font-size: 2.2rem; margin-bottom: 4px;">🐆💖👑</div>
+    <h1 class="font-gyaru logo-title">Shibuya Gal Thrift</h1>
+    <p class="subtitle">✨ Toko Barang Antik, Baju Y2K & Aksesoris Retro ✨</p>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="btn-tab-login" onclick="switchAuth('login')">Masuk Member</button>
+      <button class="auth-tab" id="btn-tab-reg" onclick="switchAuth('register')">Daftar VIP</button>
+    </div>
+
+    <div id="auth-error" class="error-banner"></div>
+
+    <!-- Form Login -->
+    <form id="form-login" onsubmit="handleLogin(event)">
+      <div class="input-group">
+        <label>🌸 Username Gal</label>
+        <input type="text" id="login-user" placeholder="Ketik username..." required />
+      </div>
+      <div class="input-group">
+        <label>🔒 Password</label>
+        <input type="password" id="login-pass" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-bling">Masuk ke Butik ✨</button>
+      <button type="button" class="btn-guest" onclick="guestLogin()">🐆 Masuk Instan (Akun Tamu)</button>
+    </form>
+
+    <!-- Form Register -->
+    <form id="form-register" class="hidden" onsubmit="handleRegister(event)">
+      <div class="input-group">
+        <label>🎀 Username Baru</label>
+        <input type="text" id="reg-user" placeholder="Contoh: hime_gyaru99" required />
+      </div>
+      <div class="input-group">
+        <label>💄 Gaya Favoritmu</label>
+        <select id="reg-style">
+          <option value="Hime Gyaru">Hime Gyaru (Princess Retro)</option>
+          <option value="Agejo Gyaru">Agejo Gyaru (Glam Pink & Black)</option>
+          <option value="Y2K Vintage">Y2K Vintage Collector</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>🔒 Buat Password</label>
+        <input type="password" id="reg-pass" placeholder="Minimal 4 karakter" minlength="4" required />
+      </div>
+      <button type="submit" class="btn-bling">Gabung Member VIP 👑</button>
+    </form>
+  </section>
+
+  <!-- ================= HALAMAN UTAMA TOKO THRIFT ================= -->
+  <section id="shop-container">
+    <!-- Header Bar -->
+    <header class="gyaru-card top-bar">
+      <div class="user-pill">
+        <span style="font-size: 1.5rem;">💅</span>
+        <div>
+          <div class="font-gyaru" style="color: var(--hot-pink);" id="nav-username">Gal Member</div>
+          <small style="color: var(--purple-y2k);" id="nav-style">Style: Hime Gyaru</small>
+        </div>
+      </div>
+
+      <h2 class="font-gyaru" style="color: var(--hot-pink); font-size: 1.5rem;">✨ SHIBUYA GAL THRIFT ✨</h2>
+
+      <div class="nav-actions">
+        <button class="pill-btn" onclick="openModal('sell-modal')">➕ Titip Jual Barang</button>
+        <button class="pill-btn active" onclick="openModal('cart-modal')">🛍️ Tas (<span id="cart-count">0</span>)</button>
+        <button class="pill-btn" onclick="logout()">Keluar</button>
+      </div>
+    </header>
+
+    <!-- Filter Kategori -->
+    <div class="filter-bar">
+      <button class="pill-btn active" onclick="filterCategory('all', this)">💖 Semua Koleksi</button>
+      <button class="pill-btn" onclick="filterCategory('baju', this)">👗 Baju Vintage</button>
+      <button class="pill-btn" onclick="filterCategory('aksesoris', this)">💍 Aksesoris & Tas</button>
+      <button class="pill-btn" onclick="filterCategory('antik', this)">📻 Barang Antik</button>
+    </div>
+
+    <!-- Daftar Produk Thrift -->
+    <div class="product-grid" id="product-grid"></div>
+  </section>
+
+  <!-- ================= MODAL KERANJANG BELANJA ================= -->
+  <div id="cart-modal" class="modal-overlay" onclick="closeModalOnBg(event, 'cart-modal')">
+    <div class="gyaru-card modal-box">
+      <h3 class="font-gyaru" style="color: var(--hot-pink); font-size: 1.4rem; margin-bottom: 14px;">🛍️ Tas Belanja Kamu</h3>
+      <div id="cart-items-list"></div>
+      <div style="margin: 16px 0; font-weight: 700; font-size: 1.1rem; text-align: right; color: var(--purple-y2k);">
+        Total: Rp <span id="cart-total">0</span>
+      </div>
+      <button class="btn-bling" onclick="checkout()">Checkout Sekarang 💖</button>
+      <button class="btn-guest" onclick="closeModal('cart-modal')">Tutup</button>
+    </div>
+  </div>
+
+  <!-- ================= MODAL TITIP JUAL BARANG THRIFT ================= -->
+  <div id="sell-modal" class="modal-overlay" onclick="closeModalOnBg(event, 'sell-modal')">
+    <div class="gyaru-card modal-box">
+      <h3 class="font-gyaru" style="color: var(--hot-pink); font-size: 1.4rem; margin-bottom: 14px;">✨ Jual Barang Pre-loved / Antik</h3>
+      <form onsubmit="addNewItem(event)">
+        <div class="input-group">
+          <label>Nama Barang</label>
+          <input type="text" id="new-name" placeholder="Contoh: Jaket Bulu Leopard 2000s" required />
+        </div>
+        <div class="input-group">
+          <label>Kategori</label>
+          <select id="new-cat">
+            <option value="baju">Baju Vintage</option>
+            <option value="aksesoris">Aksesoris & Tas</option>
+            <option value="antik">Barang Antik</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Tahun / Era Barang</label>
+          <input type="text" id="new-era" placeholder="Contoh: Era 1998" required />
+        </div>
+        <div class="input-group">
+          <label>Harga (Rp)</label>
+          <input type="number" id="new-price" placeholder="125000" min="5000" required />
+        </div>
+        <button type="submit" class="btn-bling">Pajang di Etalase 🐆</button>
+        <button type="button" class="btn-guest" onclick="closeModal('sell-modal')">Batal</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // ================= DATA AWAL PRODUK THRIFT =================
+    let products = [
+      { id: 1, name: "Kardigan Bulu Leopard Y2K", cat: "baju", era: "2002", price: 145000, emoji: "🐆", desc: "Kondisi 95% mulus, bahan lembut motif macan tutul." },
+      { id: 2, name: "Kamera Pocket Analog Pink", cat: "antik", era: "1996", price: 320000, emoji: "📸", desc: "Kamera film 35mm langka, flash masih menyala normal." },
+      { id: 3, name: "Kacamata Hitam Berlian Rhinestone", cat: "aksesoris", era: "2004", price: 85000, emoji: "🕶️", desc: "Bingkai pink transparan dengan hiasan kristal berkilau." },
+      { id: 4, name: "Rok Mini Lipit Plaid Shibuya", cat: "baju", era: "2001", price: 110000, emoji: "👗", desc: "Motif kotak-kotak pink & hitam dengan gesper rantai." },
+      { id: 5, name: "Cermin Meja Ukir Victoria Antik", cat: "antik", era: "1985", price: 210000, emoji: "🪞", desc: "Cermin rias meja bahan kuningan dengan ukiran mawar." },
+      { id: 6, name: "Tas Bahu Mini Glossy Heart", cat: "aksesoris", era: "2003", price: 130000, emoji: "👜", desc: "Bahan kulit sintetis mengilap dengan gantungan hati." }
+    ];
+
+    let cart = [];
+    let currentFilter = 'all';
+
+    // ================= SISTEM LOGIN & REGISTER =================
+    function switchAuth(mode) {
+      document.getElementById('auth-error').style.display = 'none';
+      const isLogin = mode === 'login';
+      document.getElementById('form-login').classList.toggle('hidden', !isLogin);
+      document.getElementById('form-register').classList.toggle('hidden', isLogin);
+      document.getElementById('btn-tab-login').classList.toggle('active', isLogin);
+      document.getElementById('btn-tab-reg').classList.toggle('active', !isLogin);
+    }
+
+    function showAuthError(msg) {
+      const el = document.getElementById('auth-error');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      const user = document.getElementById('reg-user').value.trim();
+      const style = document.getElementById('reg-style').value;
+      const pass = document.getElementById('reg-pass').value;
+
+      const db = JSON.parse(localStorage.getItem('gyaru_users') || '{}');
+      if (db[user]) {
+        showAuthError('Username sudah dipakai gal lain! Coba nama lain ya 💅');
+        return;
+      }
+
+      db[user] = { pass, style };
+      localStorage.setItem('gyaru_users', JSON.stringify(db));
+      enterShop(user, style);
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('login-user').value.trim();
+      const pass = document.getElementById('login-pass').value;
+
+      const db = JSON.parse(localStorage.getItem('gyaru_users') || '{}');
+      if (!db[user] || db[user].pass !== pass) {
+        showAuthError('Username atau password salah! Cek lagi ya 💖');
+        return;
+      }
+
+      enterShop(user, db[user].style);
+    }
+
+    function guestLogin() {
+      enterShop('Tamu_VIP', 'Shibuya Explorer');
+    }
+
+    function enterShop(username, style) {
+      document.getElementById('auth-container').style.display = 'none';
+      document.getElementById('shop-container').style.display = 'block';
+      document.getElementById('nav-username').textContent = username;
+      document.getElementById('nav-style').textContent = 'Style: ' + style;
+      renderProducts();
+    }
+
+    function logout() {
+      cart = [];
+      updateCartUI();
+      document.getElementById('shop-container').style.display = 'none';
+      document.getElementById('auth-container').style.display = 'block';
+    }
+
+    // ================= KATALOG & FILTER PRODUK =================
+    function filterCategory(cat, btn) {
+      currentFilter = cat;
+      document.querySelectorAll('.filter-bar .pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderProducts();
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = '';
+
+      const filtered = currentFilter === 'all' 
+        ? products 
+        : products.filter(p => p.cat === currentFilter);
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div>
+            <div class="item-emoji-box">
+              <span class="era-badge">Era ${item.era}</span>
+              <span>${item.emoji}</span>
+            </div>
+            <h3 class="item-title">${item.name}</h3>
+            <p class="item-desc">${item.desc}</p>
+          </div>
+          <div>
+            <div class="item-price">Rp ${item.price.toLocaleString('id-ID')}</div>
+            <button class="btn-bling" style="padding: 9px; font-size: 0.9rem;" onclick="addToCart(${item.id})">
+              + Masuk Tas 🛍️
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // ================= KERANJANG & TITIP JUAL =================
+    function addToCart(id) {
+      const item = products.find(p => p.id === id);
+      if (item) {
+        cart.push(item);
+        updateCartUI();
+      }
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      document.getElementById('cart-count').textContent = cart.length;
+      const list = document.getElementById('cart-items-list');
+      list.innerHTML = '';
+      let total = 0;
+
+      if (cart.length === 0) {
+        list.innerHTML = '<p style="text-align:center; color:#888; padding:16px;">Tas belanjamu masih kosong nih 🐆</p>';
+      } else {
+        cart.forEach((item, idx) => {
+          total += item.price;
+          const row = document.createElement('div');
+          row.className = 'cart-row';
+          row.innerHTML = `
+            <span>${item.emoji} ${item.name}</span>
+            <div>
+              <span>Rp ${item.price.toLocaleString('id-ID')}</span>
+              <button onclick="removeFromCart(${idx})" style="margin-left:8px; border:none; background:none; color:#d00036; cursor:pointer; font-weight:bold;">✖</button>
+            </div>
+          `;
+          list.appendChild(row);
+        });
+      }
+      document.getElementById('cart-total').textContent = total.toLocaleString('id-ID');
+    }
+
+    function checkout() {
+      if (cart.length === 0) return alert('Pilih barang vintage favoritmu dulu ya! 💖');
+      alert('Yeay! Pesanan thrift antikmu berhasil diproses ✨ Terima kasih sudah belanja di Shibuya Gal Thrift!');
+      cart = [];
+      updateCartUI();
+      closeModal('cart-modal');
+    }
+
+    function addNewItem(e) {
+      e.preventDefault();
+      const name = document.getElementById('new-name').value.trim();
+      const cat = document.getElementById('new-cat').value;
+      const era = document.getElementById('new-era').value.trim();
+      const price = parseInt(document.getElementById('new-price').value, 10);
+      const emojis = { baju: '👚', aksesoris: '👑', antik: '🕰️' };
+
+      products.unshift({
+        id: Date.now(),
+        name,
+        cat,
+        era,
+        price,
+        emoji: emojis[cat] || '✨',
+        desc: 'Koleksi pre-loved pilihan dari member Shibuya Gal Thrift.'
+      });
+
+      e.target.reset();
+      closeModal('sell-modal');
+      renderProducts();
+    }
+
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function closeModalOnBg(e, id) {
+      if (e.target.id === id) closeModal(id);
+    }
+  </script>
+</body>
+</html>
